@@ -1,2 +1,2 @@
-# lakshya-technical
+# lakshya-technical oc
 Initial setup
