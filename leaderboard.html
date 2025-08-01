@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Leaderboard | Manipal Hackathon 2025</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    /* All your styles remain unchanged */
+    :root {
+      --green-accent: #00e5a8;
+      --bg-color-light: #ffffff;
+      --text-color-light: #1b1b1b;
+      --card-bg-light: #f5f5f5;
+      --border-light: #ccc;
+      --highlight-light: var(--green-accent);
+      --bg-color-dark: #0d0d0d;
+      --text-color-dark: #f0f0f0;
+      --card-bg-dark: #181818;
+      --border-dark: #333;
+      --highlight-dark: #00ffe1;
+    }
+
+    [data-theme="light"] {
+      --bg-color: var(--bg-color-light);
+      --text-color: var(--text-color-light);
+      --card-bg: var(--card-bg-light);
+      --border-color: var(--border-light);
+      --highlight: var(--highlight-light);
+    }
+
+    [data-theme="dark"] {
+      --bg-color: var(--bg-color-dark);
+      --text-color: var(--text-color-dark);
+      --card-bg: var(--card-bg-dark);
+      --border-color: var(--border-dark);
+      --highlight: var(--highlight-dark);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    header {
+      padding: 20px 24px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      font-size: 20px;
+      background: linear-gradient(to right, #00f0ff, #bf00ff);
+      -webkit-background-clip: text;
+      color: transparent;
+      font-weight: bold;
+    }
+
+    .header-right {
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .theme-toggle {
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .title-block {
+      text-align: center;
+      margin: 12px 24px 0;
+    }
+
+    .title-block h1 {
+      background: linear-gradient(to right, #fdd835, #ef5350);
+      -webkit-background-clip: text;
+      color: transparent;
+      font-size: 26px;
+      font-weight: 700;
+    }
+
+    .title-block p {
+      color: var(--text-color);
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    .info-cards,
+    .leaderboard,
+    .search-box {
+      max-width: 1200px;
+      margin: 24px auto;
+      padding: 0 24px;
+    }
+
+    .info-cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px 16px;
+      flex: 1 1 300px;
+      text-align: center;
+    }
+
+    .card i {
+      font-size: 24px;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .value {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .label {
+      font-size: 14px;
+      color: #888;
+    }
+
+    .search-box input {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      display: block;
+      padding: 12px;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      border-radius: 10px;
+      font-size: 15px;
+    }
+
+    .team-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .team-details {
+      flex: 1;
+      margin-left: 12px;
+    }
+
+    .team-name {
+      font-weight: bold;
+      color: var(--text-color);
+    }
+
+    .team-college {
+      color: #888;
+      font-size: 14px;
+    }
+
+    .points {
+      color: var(--highlight);
+      font-weight: bold;
+    }
+
+    .rank-icon {
+      font-size: 20px;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .header-right {
+        margin-top: 8px;
+        justify-content: flex-end;
+        width: 100%;
+      }
+
+      .team-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .team-details {
+        margin-left: 0;
+        margin-top: 8px;
+      }
+
+      .points {
+        margin-top: 8px;
+      }
+
+      .search-box input {
+        max-width: 95%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">&lt;/&gt; <span style="color: var(--highlight);">Manipal Hackathon 2025</span></div>
+    <div class="header-right">
+      <i class="fas fa-circle-half-stroke theme-toggle" onclick="toggleTheme()"></i>
+    </div>
+  </header>
+
+  <div class="title-block">
+    <h1>Leaderboard</h1>
+    <p>Real-time rankings of teams competing in Manipal Hackathon 2025</p>
+  </div>
+
+  <div class="info-cards">
+    <div class="card">
+      <i class="fas fa-users" style="color: var(--highlight);"></i>
+      <div class="value">156</div>
+      <div class="label">Active Teams</div>
+    </div>
+    <div class="card">
+      <i class="fas fa-exclamation-triangle" style="color: var(--highlight);"></i>
+      <div class="value">12</div>
+      <div class="label">Problem Statements</div>
+    </div>
+    <div class="card">
+      <i class="fas fa-stopwatch" style="color: var(--highlight);"></i>
+      <div class="value" id="countdown">--:--:--</div>
+      <div class="label">Time Remaining</div>
+    </div>
+  </div>
+
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search teams or colleges...">
+  </div>
+
+  <div class="leaderboard" id="leaderboard"></div>
+
+  <script>
+    const teams = [
+      { position: 1, team: 'Code Crusaders', college: 'MIT Manipal', points: 2850 },
+      { position: 2, team: 'Byte Benders', college: 'IIT Delhi', points: 2700 },
+      { position: 3, team: 'Bug Smashers', college: 'NIT Trichy', points: 2600 },
+      { position: 4, team: 'Debug Ninjas', college: 'IIIT Hyderabad', points: 2550 },
+      { position: 5, team: 'Tech Titans', college: 'VIT Vellore', points: 2450 },
+    ];
+
+    const leaderboardEl = document.getElementById('leaderboard');
+
+    function renderLeaderboard(list) {
+      leaderboardEl.innerHTML = '';
+      list.forEach(team => {
+        const card = document.createElement('div');
+        card.className = 'team-card';
+
+        const icon = document.createElement('div');
+        icon.className = 'rank-icon';
+        icon.innerHTML = team.position <= 3 ? '🏆' : `#${team.position}`;
+
+        const details = document.createElement('div');
+        details.className = 'team-details';
+        details.innerHTML = `<div class="team-name">${team.team}</div><div class="team-college">${team.college}</div>`;
+
+        const points = document.createElement('div');
+        points.className = 'points';
+        points.textContent = `${team.points} pts`;
+
+        card.append(icon, details, points);
+        leaderboardEl.appendChild(card);
+      });
+    }
+
+    renderLeaderboard(teams);
+
+    document.getElementById('searchInput').addEventListener('input', function () {
+      const query = this.value.toLowerCase();
+      const filtered = teams.filter(t =>
+        t.team.toLowerCase().includes(query) ||
+        t.college.toLowerCase().includes(query)
+      );
+      renderLeaderboard(filtered);
+    });
+
+    const countdownEl = document.getElementById('countdown');
+    const target = new Date('2025-10-14T11:00:00');
+
+    function updateCountdown() {
+      const now = new Date();
+      let diff = Math.max(0, target - now);
+      const h = String(Math.floor(diff / 3600000)).padStart(2, '0');
+      const m = String(Math.floor((diff / 60000) % 60)).padStart(2, '0');
+      const s = String(Math.floor((diff / 1000) % 60)).padStart(2, '0');
+      countdownEl.textContent = `${h}:${m}:${s}`;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    }
+  </script>
+</body>
+</html>
